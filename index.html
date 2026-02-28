@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LET Review – Professional Education</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a0d02;
+    --parchment: #f5edd8;
+    --cream: #fdf6e3;
+    --gold: #c9963a;
+    --gold-light: #e8b84b;
+    --deep-brown: #3b2009;
+    --burgundy: #7a1c2e;
+    --forest: #1e4a2e;
+    --sage: #4a7c5e;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    background: var(--ink);
+    font-family: 'Crimson Pro', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background:
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9963a' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"),
+      radial-gradient(ellipse at 20% 20%, #2d1a05 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 80%, #1a0d02 0%, transparent 60%);
+    background-color: #1a0d02;
+    z-index: -1;
+  }
+
+  header {
+    width: 100%;
+    text-align: center;
+    padding: 2.5rem 1rem 1rem;
+  }
+  .header-ornament {
+    color: var(--gold); font-size: 1rem;
+    letter-spacing: 6px; opacity: 0.7; margin-bottom: 0.5rem;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 4vw, 2.8rem);
+    font-weight: 900; color: var(--parchment);
+    line-height: 1.1; text-shadow: 0 2px 20px rgba(201,150,58,0.3);
+  }
+  header h1 span { color: var(--gold); font-style: italic; }
+  .subtitle {
+    font-size: 0.9rem; color: var(--gold-light);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-top: 0.4rem; opacity: 0.8;
+  }
+  .divider {
+    display: flex; align-items: center; gap: 1rem;
+    max-width: 400px; margin: 0.8rem auto 0; opacity: 0.5;
+  }
+  .divider::before,.divider::after { content:''; flex:1; height:1px; background:var(--gold); }
+  .divider-icon { color:var(--gold); font-size:0.8rem; }
+
+  /* TOPIC SCREEN */
+  #topic-screen {
+    width: 100%; max-width: 860px;
+    padding: 1.5rem 1rem 3rem;
+    animation: fadeUp 0.5s ease;
+  }
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(20px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+  .topic-heading {
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; color: var(--gold);
+    letter-spacing: 3px; text-transform: uppercase;
+    margin-bottom: 1.8rem; opacity: 0.9;
+  }
+  .topic-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.2rem;
+  }
+  .topic-card {
+    background: linear-gradient(160deg, rgba(245,237,216,0.07), rgba(245,237,216,0.03));
+    border: 1.5px solid rgba(201,150,58,0.3);
+    border-radius: 14px; padding: 2rem 1.5rem;
+    cursor: pointer; transition: all 0.25s;
+    text-align: center; position: relative; overflow: hidden;
+  }
+  .topic-card::before {
+    content: ''; position: absolute; top:0; left:0; right:0; height:3px;
+    background: var(--gold); transform: scaleX(0); transform-origin: left;
+    transition: transform 0.3s;
+  }
+  .topic-card:hover {
+    border-color: var(--gold); transform: translateY(-5px);
+    box-shadow: 0 16px 45px rgba(0,0,0,0.55), 0 0 20px rgba(201,150,58,0.12);
+  }
+  .topic-card:hover::before { transform: scaleX(1); }
+  .topic-icon { font-size: 2.8rem; margin-bottom: 1rem; display: block; }
+  .topic-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--parchment); margin-bottom: 0.5rem; line-height: 1.3;
+  }
+  .topic-desc {
+    font-size: 0.85rem; color: rgba(245,237,216,0.5);
+    line-height: 1.5; letter-spacing: 0.3px;
+  }
+  .topic-count {
+    display: inline-block; margin-top: 1rem;
+    background: rgba(201,150,58,0.15);
+    border: 1px solid rgba(201,150,58,0.3);
+    color: var(--gold); font-size: 0.75rem;
+    letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.3rem 0.8rem; border-radius: 20px;
+  }
+
+  /* SCORE AREA */
+  .score-area {
+    display: none; gap: 1.5rem;
+    margin: 0.8rem 0 1.2rem;
+  }
+  .score-area.visible { display: flex; }
+  .score-card {
+    display: flex; flex-direction: column; align-items: center;
+    background: rgba(245,237,216,0.05);
+    border: 1px solid rgba(201,150,58,0.3);
+    border-radius: 8px; padding: 0.7rem 2rem;
+    position: relative; overflow: hidden;
+  }
+  .score-card::before { content:''; position:absolute; top:0;left:0;right:0;height:3px; }
+  .score-card.correct::before { background: var(--sage); }
+  .score-card.wrong::before   { background: var(--burgundy); }
+  .score-label { font-size:0.7rem; letter-spacing:3px; text-transform:uppercase; color:var(--gold); margin-bottom:0.2rem; }
+  .score-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:700; transition:all 0.3s; }
+  .score-card.correct .score-num { color:#6fbf8a; }
+  .score-card.wrong .score-num   { color:#e07a8a; }
+
+  /* QUIZ WRAP */
+  .quiz-wrap {
+    width: 100%; max-width: 760px;
+    padding: 0 1rem 3rem; display: none;
+  }
+  .quiz-wrap.visible { display: block; }
+
+  .quiz-header-row {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.8rem; flex-wrap: wrap; gap: 0.5rem;
+  }
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent;
+    border: 1px solid rgba(201,150,58,0.35);
+    color: var(--gold); font-family: 'Crimson Pro', serif;
+    font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase;
+    padding: 0.45rem 1rem; border-radius: 6px; cursor: pointer; transition: all 0.2s;
+  }
+  .back-btn:hover { background: rgba(201,150,58,0.1); border-color: var(--gold); }
+  .current-topic-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(201,150,58,0.12);
+    border: 1px solid rgba(201,150,58,0.3);
+    color: var(--gold-light); font-size: 0.78rem;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    padding: 0.4rem 1rem; border-radius: 20px;
+  }
+
+  /* QUESTION CARD */
+  .question-card {
+    background: linear-gradient(160deg, #fdf6e3 0%, #f0e6c8 100%);
+    border-radius: 12px; padding: 2rem 2.5rem 2.5rem;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(201,150,58,0.4);
+    animation: pageFlip 0.4s ease-out;
+  }
+  @keyframes pageFlip {
+    from { opacity:0; transform:translateY(16px) scale(0.98); }
+    to   { opacity:1; transform:translateY(0) scale(1); }
+  }
+  .question-card::before { content:'❧'; font-size:1.5rem; color:var(--gold); opacity:0.4; position:absolute; top:0.8rem; left:1rem; }
+  .question-card::after  { content:'❧'; font-size:1.5rem; color:var(--gold); opacity:0.4; position:absolute; bottom:0.8rem; right:1rem; transform:rotate(180deg); }
+
+  .q-meta { display:flex; align-items:center; gap:0.75rem; margin-bottom:1.2rem; flex-wrap:wrap; }
+  .q-number {
+    background:var(--deep-brown); color:var(--gold);
+    font-family:'Playfair Display',serif; font-size:0.8rem; font-weight:700;
+    padding:0.25rem 0.75rem; border-radius:4px; letter-spacing:1px;
+  }
+  .q-category {
+    background:rgba(58,32,9,0.12); color:var(--deep-brown);
+    font-size:0.78rem; letter-spacing:2px; text-transform:uppercase;
+    padding:0.25rem 0.85rem; border-radius:4px;
+    border:1px solid rgba(58,32,9,0.2); font-weight:300;
+  }
+  .question-text {
+    font-family:'Playfair Display',serif;
+    font-size:clamp(1rem,2.5vw,1.25rem);
+    font-weight:700; color:var(--ink);
+    line-height:1.5; margin-bottom:1.8rem; font-style:italic;
+  }
+  .choices { display:flex; flex-direction:column; gap:0.75rem; }
+  .choice-btn {
+    display:flex; align-items:center; gap:1rem;
+    background:rgba(26,16,8,0.06);
+    border:1.5px solid rgba(26,16,8,0.18);
+    border-radius:8px; padding:0.85rem 1.2rem;
+    cursor:pointer; text-align:left; transition:all 0.2s;
+    font-family:'Crimson Pro',serif; font-size:1rem; color:var(--ink);
+  }
+  .choice-btn:hover:not(:disabled) {
+    background:rgba(201,150,58,0.12); border-color:var(--gold);
+    transform:translateX(4px); box-shadow:-3px 0 0 var(--gold);
+  }
+  .choice-btn:disabled { cursor:default; }
+  .choice-label {
+    width:28px; height:28px; border-radius:50%;
+    background:var(--deep-brown); color:var(--gold);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Playfair Display',serif; font-size:0.85rem; font-weight:700;
+    flex-shrink:0; transition:all 0.2s;
+  }
+  .choice-btn.correct-ans { background:rgba(30,74,46,0.15); border-color:var(--forest); color:var(--forest); }
+  .choice-btn.correct-ans .choice-label { background:var(--forest); color:#a8e6bb; }
+  .choice-btn.wrong-ans { background:rgba(122,28,46,0.12); border-color:var(--burgundy); color:var(--burgundy); }
+  .choice-btn.wrong-ans .choice-label { background:var(--burgundy); color:#f4b8c3; }
+
+  .feedback-box {
+    display:none; margin-top:1.2rem; border-radius:8px;
+    padding:1.1rem 1.4rem; font-size:0.95rem; line-height:1.5;
+    animation:fadeIn 0.3s ease;
+  }
+  @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
+  .feedback-box.show { display:block; }
+  .feedback-box.correct-fb { background:rgba(30,74,46,0.12); border:1.5px solid var(--forest); color:var(--forest); }
+  .feedback-box.wrong-fb   { background:rgba(122,28,46,0.1);  border:1.5px solid var(--burgundy); color:var(--burgundy); }
+  .feedback-title { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem; }
+
+  .next-btn {
+    display:none; margin-top:1.4rem; width:100%;
+    padding:1rem;
+    background:linear-gradient(135deg,var(--deep-brown),#5a3010);
+    color:var(--gold); border:1.5px solid var(--gold);
+    border-radius:8px; font-family:'Playfair Display',serif;
+    font-size:1rem; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+    cursor:pointer; transition:all 0.2s; box-shadow:0 4px 20px rgba(0,0,0,0.3);
+  }
+  .next-btn:hover { background:linear-gradient(135deg,#5a3010,#7a4515); transform:translateY(-1px); }
+  .next-btn.show { display:block; }
+
+  /* PROGRESS */
+  .progress-area { margin-top:1.8rem; }
+  .progress-labels { display:flex; justify-content:space-between; font-size:0.8rem; color:rgba(245,237,216,0.5); letter-spacing:2px; text-transform:uppercase; margin-bottom:0.5rem; }
+  .progress-bar-bg { height:6px; background:rgba(245,237,216,0.1); border-radius:3px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background:linear-gradient(90deg,var(--gold),var(--gold-light)); border-radius:3px; transition:width 0.4s ease; box-shadow:0 0 8px rgba(201,150,58,0.5); }
+
+  /* FINISH SCREEN */
+  .finish-screen {
+    display:none; text-align:center;
+    background:linear-gradient(160deg,#fdf6e3 0%,#f0e6c8 100%);
+    border-radius:12px; padding:3rem 2.5rem;
+    box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 0 1px rgba(201,150,58,0.4);
+    animation:pageFlip 0.5s ease-out;
+  }
+  .finish-screen.show { display:block; }
+  .finish-icon { font-size:3.5rem; margin-bottom:1rem; }
+  .finish-title { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; color:var(--ink); margin-bottom:0.5rem; }
+  .finish-subtitle { color:var(--deep-brown); font-size:1.05rem; margin-bottom:1.5rem; opacity:0.8; }
+  .finish-stats { display:flex; gap:2rem; justify-content:center; margin-bottom:2rem; flex-wrap:wrap; }
+  .finish-stat { display:flex; flex-direction:column; align-items:center; }
+  .finish-stat-num { font-family:'Playfair Display',serif; font-size:2.5rem; font-weight:700; }
+  .finish-stat-label { font-size:0.8rem; letter-spacing:2px; text-transform:uppercase; color:var(--deep-brown); opacity:0.7; }
+  .finish-btns { display:flex; gap:1rem; justify-content:center; flex-wrap:wrap; }
+  .restart-btn, .change-topic-btn {
+    padding:0.9rem 2rem; border-radius:8px;
+    font-family:'Playfair Display',serif; font-size:0.95rem; font-weight:700;
+    letter-spacing:2px; text-transform:uppercase; cursor:pointer; transition:all 0.2s;
+  }
+  .restart-btn { background:linear-gradient(135deg,var(--deep-brown),#5a3010); color:var(--gold); border:1.5px solid var(--gold); }
+  .restart-btn:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,0.3); }
+  .change-topic-btn { background:transparent; color:var(--deep-brown); border:1.5px solid var(--deep-brown); }
+  .change-topic-btn:hover { background:rgba(58,32,9,0.08); transform:translateY(-2px); }
+
+  .powered-by { margin-top:2rem; font-size:0.75rem; color:rgba(245,237,216,0.2); letter-spacing:3px; text-transform:uppercase; text-align:center; padding-bottom:2rem; }
+
+  @media(max-width:520px){
+    .question-card{padding:1.5rem 1.2rem 2rem;}
+    .score-card{padding:0.6rem 1.2rem;}
+    .topic-grid{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-ornament">✦ &nbsp; P R O F E S S I O N A L &nbsp; E D U C A T I O N &nbsp; ✦</div>
+  <h1>LET Review: <span>Prof. Ed.</span></h1>
+  <p class="subtitle">Philippine Licensure Examination for Teachers</p>
+  <div class="divider"><span class="divider-icon">📖</span></div>
+</header>
+
+<!-- TOPIC SELECTION -->
+<div id="topic-screen">
+  <p class="topic-heading">— Choose Your Topic —</p>
+  <div class="topic-grid">
+    <div class="topic-card" onclick="startTopic('world-authors')">
+      <span class="topic-icon">🌍</span>
+      <div class="topic-title">World Authors</div>
+      <div class="topic-desc">The great literary figures — Shakespeare to García Márquez, Homer to Kafka and beyond.</div>
+      <span class="topic-count">50 Questions</span>
+    </div>
+    <div class="topic-card" onclick="startTopic('rizal')">
+      <span class="topic-icon">🇵🇭</span>
+      <div class="topic-title">Life &amp; Works of Rizal</div>
+      <div class="topic-desc">The life, travels, writings, and legacy of Dr. José Protacio Rizal Mercado y Alonso Realonda.</div>
+      <span class="topic-count">50 Questions</span>
+    </div>
+    <div class="topic-card" onclick="startTopic('assessment')">
+      <span class="topic-icon">📝</span>
+      <div class="topic-title">Assessment of Learning</div>
+      <div class="topic-desc">Principles of educational assessment, testing, measurement, and evaluation for effective teaching.</div>
+      <span class="topic-count">50 Questions</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE CARDS -->
+<div class="score-area" id="score-area">
+  <div class="score-card correct">
+    <span class="score-label">Correct</span>
+    <span class="score-num" id="correct-count">0</span>
+  </div>
+  <div class="score-card wrong">
+    <span class="score-label">Wrong</span>
+    <span class="score-num" id="wrong-count">0</span>
+  </div>
+</div>
+
+<!-- QUIZ -->
+<div class="quiz-wrap" id="quiz-wrap">
+  <div class="quiz-header-row">
+    <button class="back-btn" onclick="goToTopics()">← Topics</button>
+    <span class="current-topic-badge" id="topic-badge">World Authors</span>
+  </div>
+
+  <div class="question-card" id="question-card">
+    <div class="q-meta">
+      <span class="q-number" id="q-number">Q1</span>
+      <span class="q-category" id="q-category">Literature</span>
+    </div>
+    <div class="question-text" id="question-text"></div>
+    <div class="choices" id="choices"></div>
+    <div class="feedback-box" id="feedback-box">
+      <div class="feedback-title" id="feedback-title"></div>
+      <div id="feedback-body"></div>
+    </div>
+    <button class="next-btn" id="next-btn" onclick="nextQuestion()">Turn the Page →</button>
+  </div>
+
+  <div class="finish-screen" id="finish-screen">
+    <div class="finish-icon">📚</div>
+    <div class="finish-title">Examination Complete</div>
+    <div class="finish-subtitle" id="finish-subtitle">You have completed all 50 questions.</div>
+    <div class="finish-stats">
+      <div class="finish-stat">
+        <span class="finish-stat-num" style="color:var(--forest)" id="final-correct">0</span>
+        <span class="finish-stat-label">Correct</span>
+      </div>
+      <div class="finish-stat">
+        <span class="finish-stat-num" style="color:var(--burgundy)" id="final-wrong">0</span>
+        <span class="finish-stat-label">Wrong</span>
+      </div>
+      <div class="finish-stat">
+        <span class="finish-stat-num" style="color:var(--gold)" id="final-pct">0%</span>
+        <span class="finish-stat-label">Score</span>
+      </div>
+    </div>
+    <div class="finish-btns">
+      <button class="restart-btn" onclick="restartTopic()">✦ Try Again</button>
+      <button class="change-topic-btn" onclick="goToTopics()">← Change Topic</button>
+    </div>
+  </div>
+
+  <div class="progress-area">
+    <div class="progress-labels">
+      <span>Progress</span>
+      <span id="progress-label">0 / 50 answered</span>
+    </div>
+    <div class="progress-bar-bg">
+      <div class="progress-bar-fill" id="progress-bar" style="width:0%"></div>
+    </div>
+  </div>
+</div>
+
+<p class="powered-by">✦ &nbsp; LET Reviewer · Professional Education Edition &nbsp; ✦</p>
+
+<script>
+const allQuestions = {
+
+'world-authors': [
+  { q:"Who is the author of 'Don Quixote', often considered the first modern novel?", choices:["Dante Alighieri","Miguel de Cervantes","Lope de Vega","Francisco de Quevedo"], ans:1, cat:"Spanish Literature", exp:"Miguel de Cervantes Saavedra wrote 'Don Quixote' (1605/1615), widely regarded as the first modern novel in Western literature." },
+  { q:"William Shakespeare is known as the 'Bard of Avon.' Which of the following is NOT one of his plays?", choices:["Macbeth","Hamlet","Faust","Othello"], ans:2, cat:"English Literature", exp:"'Faust' was written by German author Johann Wolfgang von Goethe, not Shakespeare." },
+  { q:"Which Homer epic follows Odysseus on his journey home after the Trojan War?", choices:["The Iliad","The Aeneid","The Odyssey","The Divine Comedy"], ans:2, cat:"Greek Literature", exp:"Homer's 'The Odyssey' recounts Odysseus's 10-year journey home to Ithaca after the fall of Troy." },
+  { q:"Dante Alighieri's 'The Divine Comedy' has three parts. Which is the CORRECT order?", choices:["Purgatorio, Inferno, Paradiso","Inferno, Purgatorio, Paradiso","Paradiso, Inferno, Purgatorio","Inferno, Paradiso, Purgatorio"], ans:1, cat:"Italian Literature", exp:"Dante's journey moves from Hell (Inferno) to Purgatory (Purgatorio) to Heaven (Paradiso)." },
+  { q:"Which Russian author wrote 'War and Peace' and 'Anna Karenina'?", choices:["Fyodor Dostoevsky","Anton Chekhov","Ivan Turgenev","Leo Tolstoy"], ans:3, cat:"Russian Literature", exp:"Leo Tolstoy wrote 'War and Peace' (1869) and 'Anna Karenina' (1878)." },
+  { q:"Fyodor Dostoevsky's novel exploring guilt and redemption through a student who murders a pawnbroker is:", choices:["The Brothers Karamazov","Notes from Underground","Crime and Punishment","The Idiot"], ans:2, cat:"Russian Literature", exp:"'Crime and Punishment' (1866) follows Raskolnikov's psychological torment after committing murder." },
+  { q:"Who wrote 'Madame Bovary', a landmark of literary realism published in 1857?", choices:["Victor Hugo","Honoré de Balzac","Gustave Flaubert","Émile Zola"], ans:2, cat:"French Literature", exp:"Gustave Flaubert's 'Madame Bovary' (1857) became a cornerstone of realist fiction." },
+  { q:"Which French author wrote 'Les Misérables' (1862)?", choices:["Alexandre Dumas","Victor Hugo","Albert Camus","Marcel Proust"], ans:1, cat:"French Literature", exp:"Victor Hugo wrote 'Les Misérables,' a sweeping social novel about poverty and redemption." },
+  { q:"'One Hundred Years of Solitude' was written by which Nobel Prize-winning author?", choices:["Pablo Neruda","Jorge Luis Borges","Gabriel García Márquez","Mario Vargas Llosa"], ans:2, cat:"Latin American Literature", exp:"Gabriel García Márquez of Colombia wrote this magical realist masterpiece (1967), winning the Nobel Prize in 1982." },
+  { q:"Franz Kafka, author of 'The Metamorphosis,' was a native of which city?", choices:["Vienna","Berlin","Prague","Budapest"], ans:2, cat:"Central European Literature", exp:"Franz Kafka was born in Prague and wrote primarily in German." },
+  { q:"Who wrote 'To Kill a Mockingbird' (1960)?", choices:["William Faulkner","Truman Capote","Harper Lee","Flannery O'Connor"], ans:2, cat:"American Literature", exp:"Harper Lee's Pulitzer Prize-winning novel explores racial injustice through the eyes of young Scout Finch." },
+  { q:"'The Old Man and the Sea' was written by which American Nobel laureate?", choices:["John Steinbeck","Ernest Hemingway","F. Scott Fitzgerald","William Faulkner"], ans:1, cat:"American Literature", exp:"Ernest Hemingway wrote this novella (1952) about Cuban fisherman Santiago." },
+  { q:"George Orwell's dystopian novel featuring 'Big Brother' and 'Room 101' is:", choices:["Animal Farm","Brave New World","1984","We"], ans:2, cat:"British Literature", exp:"Orwell's 'Nineteen Eighty-Four' (1949) introduced 'Big Brother' and 'doublethink' into modern vocabulary." },
+  { q:"Which author created the character Sherlock Holmes?", choices:["Wilkie Collins","Arthur Conan Doyle","Agatha Christie","Charles Dickens"], ans:1, cat:"British Literature", exp:"Sir Arthur Conan Doyle created Sherlock Holmes, first appearing in 1887." },
+  { q:"Samuel Beckett's absurdist play where two characters wait indefinitely for someone who never arrives is:", choices:["Endgame","Happy Days","Waiting for Godot","Krapp's Last Tape"], ans:2, cat:"Absurdist Drama", exp:"'Waiting for Godot' (1953) is a cornerstone of the Theatre of the Absurd." },
+  { q:"Who wrote 'The Great Gatsby' (1925)?", choices:["Ernest Hemingway","F. Scott Fitzgerald","Sinclair Lewis","Theodore Dreiser"], ans:1, cat:"American Literature", exp:"F. Scott Fitzgerald's 'The Great Gatsby' captures the allure and corruption of the American Dream." },
+  { q:"Albert Camus' novella about a man who feels nothing at his mother's funeral is:", choices:["The Plague","The Stranger","The Myth of Sisyphus","The Fall"], ans:1, cat:"French Literature", exp:"'The Stranger' (L'Étranger, 1942) exemplifies Camus' philosophy of absurdism." },
+  { q:"Which Japanese author won the first Nobel Prize in Literature awarded to a Japanese writer?", choices:["Yukio Mishima","Kobo Abe","Yasunari Kawabata","Junichiro Tanizaki"], ans:2, cat:"Japanese Literature", exp:"Yasunari Kawabata received the Nobel Prize in Literature in 1968." },
+  { q:"Chinua Achebe's novel depicting the clash of Igbo culture and colonialism is:", choices:["Arrow of God","No Longer at Ease","A Man of the People","Things Fall Apart"], ans:3, cat:"African Literature", exp:"'Things Fall Apart' (1958) is one of the most widely read books in African literature." },
+  { q:"Which poet wrote 'The Waste Land' (1922), a landmark of Modernist literature?", choices:["Ezra Pound","T.S. Eliot","W.B. Yeats","Wallace Stevens"], ans:1, cat:"Modernist Poetry", exp:"T.S. Eliot's 'The Waste Land' revolutionized poetry with its fragmented, multilingual structure." },
+  { q:"Sophocles' tragedy about a man who unknowingly kills his father and marries his mother is:", choices:["Antigone","Electra","Oedipus Rex","Ajax"], ans:2, cat:"Greek Drama", exp:"'Oedipus Rex' (c. 429 BC) is considered the perfect Greek tragedy by Aristotle." },
+  { q:"Henrik Ibsen, the 'Father of Modern Drama,' was from:", choices:["Denmark","Sweden","Finland","Norway"], ans:3, cat:"Scandinavian Literature", exp:"Henrik Ibsen (1828–1906), who wrote 'A Doll's House,' was Norwegian." },
+  { q:"Pablo Neruda, celebrated for 'Twenty Love Poems,' was a poet from:", choices:["Argentina","Colombia","Chile","Mexico"], ans:2, cat:"Latin American Poetry", exp:"Pablo Neruda (1904–1973) was a Chilean poet who won the Nobel Prize in 1971." },
+  { q:"Who wrote the play 'Death of a Salesman' (1949)?", choices:["Eugene O'Neill","Tennessee Williams","Arthur Miller","Edward Albee"], ans:2, cat:"American Drama", exp:"Arthur Miller's Pulitzer Prize-winning play examines the collapse of the American Dream through Willy Loman." },
+  { q:"Emily Dickinson is associated with which literary period?", choices:["Romanticism","Realism","American Renaissance","Modernism"], ans:2, cat:"American Poetry", exp:"Emily Dickinson (1830–1886) wrote during the American Renaissance with unconventional style." },
+  { q:"Which Russian playwright wrote 'The Cherry Orchard' and 'Three Sisters'?", choices:["Maxim Gorky","Ivan Turgenev","Leo Tolstoy","Anton Chekhov"], ans:3, cat:"Russian Drama", exp:"Anton Chekhov's plays are famous for nuanced characters and the 'Chekhov's gun' narrative principle." },
+  { q:"John Keats' ode beginning 'Thou still unravish'd bride of quietness' is:", choices:["Ode to a Nightingale","Ode to Autumn","Ode on Melancholy","Ode on a Grecian Urn"], ans:3, cat:"Romantic Poetry", exp:"'Ode on a Grecian Urn' (1819) contemplates beauty, truth, and mortality." },
+  { q:"Who is considered the greatest poet of the Tang Dynasty in China?", choices:["Wang Wei","Li Bai","Du Fu","Bai Juyi"], ans:1, cat:"East Asian Literature", exp:"Li Bai (Li Po) is celebrated for lyrical verse on friendship and nature." },
+  { q:"Rabindranath Tagore, the first non-European Nobel laureate in Literature (1913), was from:", choices:["Ceylon (Sri Lanka)","Bangladesh","India","Pakistan"], ans:2, cat:"South Asian Literature", exp:"Tagore was a Bengali poet and polymath from India, awarded the Nobel Prize for 'Gitanjali.'" },
+  { q:"Which author wrote 'I Know Why the Caged Bird Sings'?", choices:["Langston Hughes","Zora Neale Hurston","Maya Angelou","Toni Morrison"], ans:2, cat:"African American Literature", exp:"Maya Angelou's autobiographical novel (1969) is a landmark of African American literature." },
+  { q:"Toni Morrison's novel about slavery's psychological trauma, winner of the Pulitzer Prize, is:", choices:["Song of Solomon","Sula","The Bluest Eye","Beloved"], ans:3, cat:"African American Literature", exp:"'Beloved' (1987) won the Pulitzer Prize and explores the trauma of slavery through supernatural elements." },
+  { q:"Flaubert, Zola, and Maupassant are associated with which literary movement?", choices:["Romanticism","Symbolism","Realism/Naturalism","Surrealism"], ans:2, cat:"Literary Movements", exp:"These French authors are key figures of literary Realism and Naturalism." },
+  { q:"James Joyce's stream-of-consciousness masterpiece set in one day in Dublin is:", choices:["A Portrait of the Artist as a Young Man","Dubliners","Ulysses","Finnegans Wake"], ans:2, cat:"Irish Literature", exp:"'Ulysses' (1922) follows Leopold Bloom through a single day in Dublin." },
+  { q:"Which movement features magical elements in realistic settings, associated with García Márquez?", choices:["Costumbrismo","Magical Realism","Ultraism","Criollismo"], ans:1, cat:"Literary Movements", exp:"Magical Realism blends the magical into everyday realistic narrative." },
+  { q:"Who wrote 'The Canterbury Tales', the collection of stories told by pilgrims?", choices:["John Milton","Geoffrey Chaucer","Edmund Spenser","Thomas Malory"], ans:1, cat:"Medieval English Literature", exp:"Geoffrey Chaucer (c. 1343–1400) wrote 'The Canterbury Tales' in Middle English." },
+  { q:"The French Symbolist movement, represented by Mallarmé and Verlaine, emphasized:", choices:["Direct, realistic description","Suggestion and symbol over statement","Political satire","Epic historical narrative"], ans:1, cat:"Literary Movements", exp:"The Symbolist movement (1880s–1890s) prioritized symbol, mood, and suggestion over direct statement." },
+  { q:"Herman Melville's 'Moby-Dick' features Captain Ahab's obsessive hunt for:", choices:["A white shark","A blue whale","A white whale","A sea monster"], ans:2, cat:"American Literature", exp:"'Moby-Dick' (1851) follows Ahab's monomaniacal pursuit of the great white sperm whale." },
+  { q:"'Middlemarch', often called the greatest novel in English, was written by:", choices:["Jane Austen","Thomas Hardy","George Eliot","Elizabeth Gaskell"], ans:2, cat:"Victorian Literature", exp:"'Middlemarch' (1871–72) by George Eliot is celebrated for its psychological depth and social panorama." },
+  { q:"The existentialist novel 'Nausea' (1938) was written by:", choices:["Albert Camus","Simone de Beauvoir","Jean-Paul Sartre","Maurice Merleau-Ponty"], ans:2, cat:"French Literature", exp:"Sartre's first novel introduces existentialist ideas through Antoine Roquentin's diary." },
+  { q:"Virgil's 'Aeneid' follows Aeneas, who flees the ruins of:", choices:["Rome","Athens","Carthage","Troy"], ans:3, cat:"Latin Literature", exp:"The 'Aeneid' (29–19 BC) follows the Trojan hero Aeneas to Italy, where he becomes ancestor of the Romans." },
+  { q:"Which 20th-century Irish poet wrote 'The Second Coming' and 'Sailing to Byzantium'?", choices:["Seamus Heaney","Patrick Kavanagh","W.B. Yeats","Louis MacNeice"], ans:2, cat:"Irish Poetry", exp:"William Butler Yeats (1865–1939) won the Nobel Prize in Literature in 1923." },
+  { q:"Who wrote 'Brave New World' (1932), a dystopia of conditioned happiness?", choices:["George Orwell","Aldous Huxley","H.G. Wells","Evelyn Waugh"], ans:1, cat:"British Literature", exp:"Aldous Huxley's 'Brave New World' envisions a society controlled through pleasure and conditioning." },
+  { q:"Stendhal's novel chronicling the rise of Julien Sorel is:", choices:["The Charterhouse of Parma","Lucien Leuwen","Armance","The Red and the Black"], ans:3, cat:"French Literature", exp:"'The Red and the Black' (1830) follows the ambitious Julien Sorel navigating class and hypocrisy." },
+  { q:"Boris Pasternak's novel secretly sent to Italy for publication in 1957 is:", choices:["The Master and Margarita","Cancer Ward","Dr. Zhivago","The First Circle"], ans:2, cat:"Russian Literature", exp:"'Doctor Zhivago' won Pasternak the 1958 Nobel Prize, which he was forced to refuse." },
+  { q:"The Beat Generation movement, associated with Allen Ginsberg's 'Howl', emerged in:", choices:["The 1940s","The 1950s","The 1960s","The 1970s"], ans:1, cat:"American Poetry", exp:"The Beat Generation (Ginsberg, Kerouac, Burroughs) emerged in the 1950s and challenged conformity." },
+  { q:"García Márquez's technique blending everyday reality with magical elements is:", choices:["Surrealism","Magical Realism","Fabulism","Metafiction"], ans:1, cat:"Literary Movements", exp:"Magical Realism presents fantastical events in a matter-of-fact, realistic tone." },
+  { q:"Who wrote 'The Trial' (1925), in which Josef K. is prosecuted by a mysterious authority?", choices:["Franz Kafka","Stefan Zweig","Robert Musil","Hermann Broch"], ans:0, cat:"Central European Literature", exp:"Franz Kafka's posthumously published 'The Trial' is a key work of existential and absurdist literature." },
+  { q:"Which Japanese novelist wrote 'The Sea of Fertility' tetralogy and died by seppuku in 1970?", choices:["Yasunari Kawabata","Haruki Murakami","Kenzaburō Ōe","Yukio Mishima"], ans:3, cat:"Japanese Literature", exp:"Yukio Mishima (1925–1970) was a prolific author who died after a failed coup attempt." },
+  { q:"Salman Rushdie's novel about children born at the moment of India's independence is:", choices:["The Satanic Verses","The Moor's Last Sigh","The Ground Beneath Her Feet","Midnight's Children"], ans:3, cat:"Postcolonial Literature", exp:"'Midnight's Children' (1981) won the Booker Prize and blends history with magical realism." },
+  { q:"'Stream of consciousness' as a literary technique refers to:", choices:["Events in strict chronological order","The uninterrupted flow of a character's thoughts","Jumping between multiple perspectives","Omniscient third-person narration"], ans:1, cat:"Literary Technique", exp:"Stream of consciousness mimics natural thought flow, pioneered by Woolf, Joyce, and Faulkner." },
+],
+
+'rizal': [
+  { q:"José Rizal was born on:", choices:["June 18, 1861","June 19, 1861","June 18, 1862","June 19, 1862"], ans:1, cat:"Early Life", exp:"José Rizal was born on June 19, 1861, in Calamba, Laguna, Philippines." },
+  { q:"What is José Rizal's full name?", choices:["José Protacio Rizal Mercado y Alonso Realonda","José Protacio Rizal y Mercado Realonda","José Rizal Mercado Protacio y Alonso","José Alonso Rizal y Mercado Protacio"], ans:0, cat:"Personal Information", exp:"His full name was José Protacio Rizal Mercado y Alonso Realonda — a combination of family and godparent names." },
+  { q:"Rizal's first novel, published in 1887, is:", choices:["El Filibusterismo","Noli Me Tangere","Mi Último Adiós","La Solidaridad"], ans:1, cat:"Literary Works", exp:"'Noli Me Tangere' (Touch Me Not) was published in Berlin in 1887, exposing colonial abuses." },
+  { q:"What does 'Noli Me Tangere' mean in English?", choices:["Do Not Weep for Me","Touch Me Not","Rise and Fight","My Last Farewell"], ans:1, cat:"Literary Works", exp:"'Noli Me Tangere' is Latin for 'Touch Me Not' — words spoken by Jesus to Mary Magdalene after his resurrection." },
+  { q:"Rizal's second novel was published in:", choices:["1889","1890","1891","1892"], ans:2, cat:"Literary Works", exp:"'El Filibusterismo' (The Filibuster) was published in Ghent, Belgium, in 1891." },
+  { q:"The main protagonist of 'Noli Me Tangere' is:", choices:["Simoun","Elias","Crisostomo Ibarra","Padre Damaso"], ans:2, cat:"Literary Works", exp:"Juan Crisostomo Ibarra is the idealistic protagonist who returns from Europe to reform Philippine society." },
+  { q:"In 'El Filibusterismo', Ibarra reappears under the alias:", choices:["Tasio","Elias","Pilosopo","Simoun"], ans:3, cat:"Literary Works", exp:"Ibarra returns as Simoun, a wealthy jeweler plotting revolution against the Spanish colonial government." },
+  { q:"Rizal studied medicine and ophthalmology in:", choices:["Barcelona","Valencia","Seville","Madrid"], ans:3, cat:"Education & Travel", exp:"Rizal enrolled at the Universidad Central de Madrid where he studied medicine and philosophy." },
+  { q:"Rizal's poem 'Mi Último Adiós' was written:", choices:["Before his exile in Dapitan","During his voyage to Cuba","On the eve of his execution in 1896","During his studies in Europe"], ans:2, cat:"Literary Works", exp:"'Mi Último Adiós' (My Last Farewell) was written the night before his execution on December 30, 1896." },
+  { q:"Rizal was executed at:", choices:["Fort Santiago","Intramuros Plaza","Luneta (Bagumbayan)","Palacio del Gobernador"], ans:2, cat:"Death & Legacy", exp:"Rizal was executed by firing squad at Luneta (now Rizal Park) in Manila on December 30, 1896." },
+  { q:"Which organization did Rizal found in 1892?", choices:["Katipunan","La Liga Filipina","La Solidaridad","Propaganda Movement"], ans:1, cat:"Activism", exp:"Rizal founded La Liga Filipina on July 3, 1892, to unite Filipinos and promote reforms." },
+  { q:"Rizal was exiled to Dapitan in which province?", choices:["Zamboanga del Norte","Zamboanga del Sur","Misamis Occidental","Lanao del Norte"], ans:0, cat:"Exile", exp:"Rizal was exiled to Dapitan in Zamboanga del Norte from 1892 to 1896." },
+  { q:"Rizal's essay 'La Indolencia de los Filipinos' argued that Filipino indolence was caused by:", choices:["Racial inferiority","Spanish colonialism and misrule","Lack of education","Tropical climate"], ans:1, cat:"Essays", exp:"Rizal argued that Filipino indolence was the result of colonial oppression, not an inherent racial trait." },
+  { q:"Rizal annotated Antonio de Morga's 'Sucesos de las Islas Filipinas' to:", choices:["Prove Philippine independence","Show Philippines had a civilized pre-colonial history","Criticize Spanish priests","Promote the Propaganda Movement"], ans:1, cat:"Historical Works", exp:"Rizal annotated Morga's work to demonstrate that Filipinos had a rich civilization before Spanish colonization." },
+  { q:"Rizal's mother is:", choices:["Teodora Alonso","Saturnina Rizal","Narcisa Rizal","Lucia Rizal"], ans:0, cat:"Family", exp:"Teodora Alonso Realonda was Rizal's mother — an educated woman who was his first teacher." },
+  { q:"Rizal's father Francisco Rizal Mercado was:", choices:["A farmer and tenant","A prosperous tenant farmer","A government official","A schoolteacher"], ans:1, cat:"Family", exp:"Francisco Mercado Rizal was a prosperous farmer who leased land from a Dominican friar's estate in Calamba." },
+  { q:"Rizal's poem 'A la Juventud Filipina' won a prize from:", choices:["Real Academia Española","Liceo Artistico-Literario de Manila","Asociación Hispano-Filipina","Ilustrado Circle"], ans:1, cat:"Literary Works", exp:"'A la Juventud Filipina' (1879) won first prize in the Liceo Artistico-Literario literary contest in Manila." },
+  { q:"The 'Propaganda Movement' primarily operated from:", choices:["London","Berlin","Madrid","Paris"], ans:2, cat:"Activism", exp:"The Propaganda Movement was centered in Madrid, Spain, where Filipino reformists published 'La Solidaridad.'" },
+  { q:"Rizal studied ophthalmology in Germany under:", choices:["Rudolf Virchow","Wilhelm Wundt","Otto Becker","Robert Koch"], ans:2, cat:"Education & Travel", exp:"Rizal studied under Professor Otto Becker at the University of Heidelberg." },
+  { q:"Rizal's essay predicting the Philippines' future independence is:", choices:["La Indolencia de los Filipinos","Filipinas Dentro de Cien Años","El Filibusterismo","Sobre la Indolencia"], ans:1, cat:"Essays", exp:"'Filipinas Dentro de Cien Años' (The Philippines a Century Hence, 1889–1890) predicted Philippine independence." },
+  { q:"In Dapitan, Rizal established:", choices:["A school, hospital, and waterworks system","A newspaper and printing press","A military camp","A church and convent"], ans:0, cat:"Dapitan Years", exp:"In Dapitan, Rizal built a school for boys, a clinic/hospital, and an innovative waterworks/drainage system." },
+  { q:"The woman Rizal fell in love with in Dapitan was:", choices:["Leonor Rivera","Josephine Bracken","Nelly Boustead","O-Sei-San"], ans:1, cat:"Personal Life", exp:"Josephine Bracken, an Irish-American woman, lived with Rizal in Dapitan. Their child was born prematurely and died." },
+  { q:"Rizal's childhood sweetheart who eventually married another is:", choices:["Consuelo Ortiga","Josephine Bracken","Nelly Boustead","Leonor Rivera"], ans:3, cat:"Personal Life", exp:"Leonor Rivera waited faithfully but married Englishman Henry Kipping in 1891." },
+  { q:"Which law requires the reading of Rizal's novels in Philippine schools?", choices:["Republic Act 1265","Republic Act 1425","Republic Act 7722","Republic Act 4090"], ans:1, cat:"Legacy", exp:"Republic Act No. 1425 (the Rizal Law, 1956) mandates that Rizal's novels be taught in all Philippine schools." },
+  { q:"The execution of Rizal was ordered by:", choices:["Governor-General Valeriano Weyler","Governor-General Camilo de Polavieja","Governor-General Ramon Blanco","Governor-General Emilio Terrero"], ans:1, cat:"Death & Legacy", exp:"Governor-General Camilo de Polavieja signed the execution order for Rizal on December 26, 1896." },
+  { q:"Rizal's retraction document is controversial because:", choices:["It was written in Tagalog, not Spanish","Its authenticity is disputed by historians","It was never filed officially","It was signed under torture"], ans:1, cat:"Death & Legacy", exp:"Historians debate whether the retraction document was authentic, forged, or signed under duress." },
+  { q:"In what language was 'Noli Me Tangere' originally written?", choices:["Tagalog","Filipino","Spanish","Latin"], ans:2, cat:"Literary Works", exp:"'Noli Me Tangere' was written in Spanish, the language of the educated elite in colonial Philippines." },
+  { q:"The Katipunan was founded by Andres Bonifacio in:", choices:["1891","1892","1893","1896"], ans:1, cat:"Historical Context", exp:"The Katipunan was founded on July 7, 1892, the day after Rizal was exiled to Dapitan." },
+  { q:"Rizal's famous last poem 'Mi Último Adiós' has how many stanzas?", choices:["11","12","13","14"], ans:3, cat:"Literary Works", exp:"'Mi Último Adiós' consists of 14 stanzas, each expressing Rizal's farewell to his country." },
+  { q:"The poem 'Mi Último Adiós' was hidden inside:", choices:["Inside his shoe","Inside an oil lamp","Inside a small alcohol stove given to his family","In a letter to Blumentritt"], ans:2, cat:"Literary Works", exp:"The poem was hidden inside a small alcohol cooking stove (alcohol lamp) given to Rizal's family before his execution." },
+  { q:"Rizal completed 'El Filibusterismo' while in:", choices:["Madrid","London","Paris","Ghent"], ans:3, cat:"Literary Works", exp:"Rizal completed and published 'El Filibusterismo' in Ghent, Belgium, with the help of Valentin Ventura." },
+  { q:"Which of the following was NOT a pseudonym used by Rizal?", choices:["Laong Laan","Dimasalang","P. Jacinto","Rizalino"], ans:3, cat:"Personal Information", exp:"'Laong Laan' and 'Dimasalang' were Rizal's pseudonyms. 'P. Jacinto' was a pen name of Emilio Jacinto." },
+  { q:"In 'Noli Me Tangere', the character who is Rizal's alter ego — the self-sacrificing revolutionary — is:", choices:["Crisostomo Ibarra","Padre Salvi","Elias","Basilio"], ans:2, cat:"Literary Works", exp:"Elias is the patriotic rebel who sacrifices himself for Ibarra, often seen as representing the revolutionary Rizal." },
+  { q:"Rizal's birthplace, Calamba, is located in:", choices:["Batangas","Quezon","Laguna","Cavite"], ans:2, cat:"Early Life", exp:"Calamba is a city in Laguna, Philippines, birthplace of Dr. José Rizal." },
+  { q:"The Spanish priest who represents clerical abuse in 'Noli Me Tangere' is:", choices:["Padre Salvi","Padre Damaso","Padre Florentino","Padre Irene"], ans:1, cat:"Literary Works", exp:"Padre Damaso is the main villain of 'Noli Me Tangere,' representing the abuses of the friarocracy." },
+  { q:"Rizal was charged with:", choices:["Treason and sedition","Rebellion, sedition, and forming illegal associations","Murder and rebellion","Libel and sedition"], ans:1, cat:"Death & Legacy", exp:"Rizal was charged with rebellion, sedition, and forming illegal associations — all capital offenses." },
+  { q:"Rizal received his secondary education at:", choices:["Letran College","San Juan de Letran","Ateneo Municipal de Manila","University of Santo Tomas"], ans:2, cat:"Education", exp:"Rizal studied at the Ateneo Municipal de Manila, graduating with the highest honors in 1877." },
+  { q:"'La Solidaridad' was the official publication of:", choices:["La Liga Filipina","Katipunan","The Propaganda Movement","The Ilustrado Circle"], ans:2, cat:"Activism", exp:"'La Solidaridad' was the official organ of the Propaganda Movement, published from 1889 to 1895." },
+  { q:"Which famous German anthropologist befriended Rizal in Berlin?", choices:["Max Weber","Ernst Haeckel","Rudolf Virchow","Wilhelm Wundt"], ans:2, cat:"Education & Travel", exp:"Rudolf Virchow, the father of modern pathology, befriended Rizal and presented his paper on Filipino skulls." },
+  { q:"Rizal's 'A la Juventud Filipina' urged Filipino youth to:", choices:["Rise up against Spain","Be the fair hope of the Fatherland and develop their talents","Leave the Philippines and study abroad","Join the Katipunan"], ans:1, cat:"Literary Works", exp:"The poem calls Filipino youth to rise as the 'fair hope of the Fatherland' and cultivate their God-given talents." },
+  { q:"Rizal received his Licentiate in Medicine from:", choices:["University of the Philippines","Universidad de Barcelona","Universidad Central de Madrid","University of Heidelberg"], ans:2, cat:"Education", exp:"Rizal earned his Licentiate in Medicine from the Universidad Central de Madrid in 1884." },
+  { q:"Rizal was a member of which Masonic lodge in Spain?", choices:["Acacia Lodge","Logia Solidaridad","Logia Nilad","Logia Rizal"], ans:1, cat:"Masonry", exp:"Rizal was initiated into Masonry at Logia Acacia and later affiliated with Logia Solidaridad in Madrid." },
+  { q:"Rizal's essay 'Letter to the Women of Malolos' praised Filipinas who:", choices:["Joined the Propaganda Movement","Wanted to establish a night school for Spanish","Protested against the friars","Supported the Katipunan"], ans:1, cat:"Essays", exp:"Rizal praised the Malolos women who petitioned to establish a night school to learn Spanish." },
+  { q:"The character Doña Victorina in 'Noli Me Tangere' satirizes:", choices:["Spanish priests","Filipino social climbers who ape Spanish ways","Government officials","Ilustrado intellectuals"], ans:1, cat:"Literary Works", exp:"Doña Victorina is a satirical portrait of Filipinos who imitate Spanish manners to climb the social ladder." },
+  { q:"Rizal's 'Filipinas Dentro de Cien Años' was published in:", choices:["Noli Me Tangere","El Filibusterismo","La Solidaridad","La Liga Filipina newsletter"], ans:2, cat:"Essays", exp:"'The Philippines a Century Hence' was serialized in 'La Solidaridad' from 1889 to 1890." },
+  { q:"'El Filibusterismo' is dedicated to:", choices:["Rizal's family","Gomez, Burgos, and Zamora (Gomburza)","Marcelo del Pilar","The Filipino people"], ans:1, cat:"Literary Works", exp:"Rizal dedicated 'El Filibusterismo' to the memory of the three martyred priests: Gomez, Burgos, and Zamora." },
+  { q:"Rizal's poem that won the 1879 literary contest was titled:", choices:["Mi Último Adiós","Sa Aking Mga Kabata","A la Juventud Filipina","Junto al Pasig"], ans:2, cat:"Literary Works", exp:"'A la Juventud Filipina' ('To the Filipino Youth') won the 1879 literary contest of the Liceo Artistico-Literario." },
+  { q:"Which ship brought Rizal from Spain to the Philippines in 1892, leading to his exile?", choices:["SS Salvadora","SS Don Juan","MV Filipinas","Don Maximo"], ans:0, cat:"Exile", exp:"Rizal arrived in Manila aboard the SS Salvadora in June 1892, and was arrested and exiled to Dapitan shortly after." },
+  { q:"Rizal's retraction document is dated:", choices:["December 28, 1896","December 29, 1896","December 30, 1896","December 31, 1896"], ans:1, cat:"Death & Legacy", exp:"The retraction document is dated December 29, 1896 — the eve of his execution." },
+  { q:"The 'Liga Filipina' was dissolved after:", choices:["The Philippine Revolution of 1896","Rizal's arrest and exile to Dapitan","Rizal's execution","The fall of Manila to the Americans"], ans:1, cat:"Activism", exp:"La Liga Filipina was dissolved immediately after Rizal was arrested and exiled to Dapitan in July 1892." },
+  { q:"Rizal's novel that introduced the character of Padre Florentino, a Filipino priest of integrity, is:", choices:["Noli Me Tangere","El Filibusterismo","Both novels","Neither novel"], ans:1, cat:"Literary Works", exp:"Padre Florentino appears only in 'El Filibusterismo,' representing the ideal, nationalistic Filipino clergy." },
+],
+
+'assessment': [
+  { q:"Assessment that occurs AFTER instruction to evaluate student achievement is called:", choices:["Formative assessment","Diagnostic assessment","Summative assessment","Norm-referenced assessment"], ans:2, cat:"Types of Assessment", exp:"Summative assessment evaluates student learning at the end of an instructional period — it summarizes what students have learned." },
+  { q:"Assessment that monitors student learning DURING instruction is called:", choices:["Summative assessment","Formative assessment","Criterion-referenced assessment","Authentic assessment"], ans:1, cat:"Types of Assessment", exp:"Formative assessment is ongoing assessment used to monitor student progress and adjust teaching accordingly." },
+  { q:"A test that measures performance against a set standard or learning objective is:", choices:["Norm-referenced test","Standardized test","Criterion-referenced test","Intelligence test"], ans:2, cat:"Types of Assessment", exp:"Criterion-referenced tests measure student performance against predetermined criteria or learning standards." },
+  { q:"A test that compares a student's score to those of other students is:", choices:["Criterion-referenced","Authentic assessment","Performance-based","Norm-referenced"], ans:3, cat:"Types of Assessment", exp:"Norm-referenced tests rank students relative to each other, such as percentile scores in standardized tests." },
+  { q:"The quality of an assessment that measures what it is supposed to measure is called:", choices:["Reliability","Objectivity","Validity","Practicality"], ans:2, cat:"Test Qualities", exp:"Validity refers to the degree to which a test accurately measures what it intends to measure." },
+  { q:"The consistency of a test in producing the same results under similar conditions is called:", choices:["Validity","Reliability","Objectivity","Usability"], ans:1, cat:"Test Qualities", exp:"Reliability refers to the consistency of an assessment — a reliable test produces stable results over repeated administrations." },
+  { q:"An assessment where students demonstrate skills through real-world tasks is called:", choices:["Summative assessment","Norm-referenced assessment","Authentic/Performance assessment","Standardized assessment"], ans:2, cat:"Types of Assessment", exp:"Authentic/performance assessment requires students to demonstrate knowledge through real-world tasks." },
+  { q:"The difficulty index of a test item is computed as:", choices:["Number of correct responses ÷ total number of test takers","Number of wrong responses ÷ total number of test takers","(Upper group correct – Lower group correct) ÷ total","Number of test takers ÷ correct responses"], ans:0, cat:"Item Analysis", exp:"The Difficulty Index (P) = number who answered correctly ÷ total number of examinees. Values range from 0 to 1." },
+  { q:"A difficulty index of 0.80 means the test item is:", choices:["Very difficult","Moderately difficult","Easy","Invalid"], ans:2, cat:"Item Analysis", exp:"A difficulty index of 0.80 means 80% of students answered correctly, indicating the item is relatively easy." },
+  { q:"The discrimination index of a test item measures:", choices:["How difficult the item is","The ability of the item to distinguish high and low achievers","The reliability of the entire test","The number of distractors"], ans:1, cat:"Item Analysis", exp:"The Discrimination Index (D) measures how well a test item differentiates between high-performing and low-performing students." },
+  { q:"A discrimination index close to +1.0 indicates:", choices:["The item is too difficult","The item effectively distinguishes high and low achievers","The item is too easy","The item should be discarded"], ans:1, cat:"Item Analysis", exp:"A high positive discrimination index means high scorers got the item right and low scorers got it wrong — the item discriminates well." },
+  { q:"Which type of validity refers to how well a test represents the full range of content being assessed?", choices:["Construct validity","Criterion validity","Content validity","Face validity"], ans:2, cat:"Validity", exp:"Content validity ensures the test covers all relevant content areas and objectives it is supposed to measure." },
+  { q:"The Table of Specifications (TOS) is used primarily to ensure:", choices:["Test reliability","Test objectivity","Content validity","Test practicality"], ans:2, cat:"Test Construction", exp:"The Table of Specifications ensures test items are distributed proportionally across all topics and cognitive levels." },
+  { q:"Bloom's original Taxonomy places which as the HIGHEST cognitive level?", choices:["Analysis","Synthesis","Evaluation","Application"], ans:2, cat:"Cognitive Taxonomy", exp:"In Bloom's original taxonomy, Evaluation is the highest level, requiring students to make judgments based on criteria." },
+  { q:"The revised Bloom's Taxonomy (Anderson & Krathwohl) places which level HIGHEST?", choices:["Evaluating","Analyzing","Applying","Creating"], ans:3, cat:"Cognitive Taxonomy", exp:"Anderson and Krathwohl's revised taxonomy places 'Creating' at the highest cognitive level." },
+  { q:"A portfolio assessment is best described as:", choices:["A standardized multiple-choice test","A collection of student work showing progress over time","A single performance task","A norm-referenced final exam"], ans:1, cat:"Types of Assessment", exp:"A portfolio is a purposeful collection of student work demonstrating learning, growth, and achievement over time." },
+  { q:"Diagnostic assessment is conducted:", choices:["After instruction to grade students","During instruction as ongoing feedback","Before instruction to identify learning needs","At the end of the school year"], ans:2, cat:"Types of Assessment", exp:"Diagnostic assessment is administered before instruction to identify prior knowledge, strengths, and areas of difficulty." },
+  { q:"'Assessment AS learning' refers to:", choices:["Teacher-designed summative tests","Students using assessment to monitor their own learning (metacognition)","External standardized examinations","Peer assessment among students"], ans:1, cat:"Assessment Philosophy", exp:"Assessment AS learning emphasizes student metacognition — students learn to assess their own thinking and progress." },
+  { q:"A rubric is best described as:", choices:["A type of multiple-choice test","A scoring guide that describes levels of performance","A norm-referenced grading scale","A diagnostic pre-test"], ans:1, cat:"Assessment Tools", exp:"A rubric is a scoring guide that describes the criteria and levels of performance used to evaluate student work." },
+  { q:"Which measure of central tendency is MOST affected by extreme scores (outliers)?", choices:["Mode","Median","Mean","Range"], ans:2, cat:"Statistics in Assessment", exp:"The mean is calculated using all scores, making it most sensitive to extremely high or low scores." },
+  { q:"The standard deviation measures:", choices:["The middle score","The most frequent score","The spread of scores around the mean","The highest minus the lowest score"], ans:2, cat:"Statistics in Assessment", exp:"Standard deviation measures how spread out scores are from the mean." },
+  { q:"If most students score very high on a test, the score distribution is said to be:", choices:["Normally distributed","Positively skewed","Negatively skewed","Bimodal"], ans:2, cat:"Statistics in Assessment", exp:"Negative skew (left skew) occurs when most scores are high and a few low scores pull the tail to the left." },
+  { q:"A percentile rank of 75 means the student scored:", choices:["75% of items correctly","Better than 75% of the students in the norm group","At the 75th level of difficulty","Above the mean by 75 points"], ans:1, cat:"Score Interpretation", exp:"A percentile rank of 75 means the student scored as well as or better than 75% of those in the comparison group." },
+  { q:"Which item format is BEST for measuring higher-order thinking skills?", choices:["True or False","Multiple choice","Matching type","Essay/constructed response"], ans:3, cat:"Test Construction", exp:"Essay items require students to organize, analyze, and synthesize information, ideal for higher-order thinking." },
+  { q:"The 'halo effect' in essay scoring refers to:", choices:["Giving full marks to neat handwriting","Allowing one positive trait to influence the overall rating","The effect of lighting on test performance","Using extra credit to boost grades"], ans:1, cat:"Assessment Bias", exp:"The halo effect occurs when a rater's overall impression of a student influences scoring of individual work." },
+  { q:"Inter-rater reliability refers to:", choices:["A test producing the same results over time","Agreement between two or more raters scoring the same work","The internal consistency of test items","The correlation between pre-test and post-test scores"], ans:1, cat:"Reliability", exp:"Inter-rater reliability measures the consistency of scores assigned by different raters to the same student work." },
+  { q:"Cronbach's Alpha is a measure of:", choices:["Content validity","Test-retest reliability","Internal consistency reliability","Inter-rater reliability"], ans:2, cat:"Reliability", exp:"Cronbach's Alpha measures internal consistency — the degree to which all items in a test measure the same construct." },
+  { q:"Which of the following is an example of a selected-response item?", choices:["Essay question","Fill-in-the-blank","Oral presentation","Multiple choice"], ans:3, cat:"Test Construction", exp:"Selected-response items (multiple choice, true/false, matching) require students to select an answer from given options." },
+  { q:"The primary purpose of a Table of Specifications (TOS) is to:", choices:["Determine the passing score","Ensure alignment between instruction, objectives, and assessment","Rank students in the class","Identify students who need remediation"], ans:1, cat:"Test Construction", exp:"A TOS ensures test items are aligned with learning objectives and proportionally distributed across content areas." },
+  { q:"Which learning domain involves attitudes, values, and emotional responses?", choices:["Cognitive","Psychomotor","Affective","Behavioral"], ans:2, cat:"Learning Domains", exp:"The affective domain (Krathwohl's taxonomy) addresses feelings, values, attitudes, and emotional development." },
+  { q:"Psychomotor learning is BEST assessed through:", choices:["Written examinations","Multiple-choice tests","Performance and observation","Portfolio review"], ans:2, cat:"Learning Domains", exp:"Psychomotor skills — physical and motor abilities — are best assessed through direct observation of performance." },
+  { q:"A low Standard Error of Measurement (SEM) indicates:", choices:["High variability in scores","Low reliability","High precision/reliability","Negative discrimination"], ans:2, cat:"Statistics in Assessment", exp:"A low SEM indicates high precision — scores are consistent and the test is highly reliable." },
+  { q:"Norm-referencing is MOST appropriate when the goal is to:", choices:["Determine mastery of content","Select the top scorers from a large pool of applicants","Diagnose learning difficulties","Measure achievement against standards"], ans:1, cat:"Types of Assessment", exp:"Norm-referenced tests are useful for ranking and selecting among candidates, as in college entrance exams." },
+  { q:"The process of aligning curriculum, instruction, and assessment is called:", choices:["Backward design","Authentic assessment","Constructive alignment","Differentiated instruction"], ans:2, cat:"Assessment Philosophy", exp:"Constructive alignment (Biggs) ensures learning outcomes, teaching methods, and assessment tasks are all aligned." },
+  { q:"In assessment, 'washback effect' refers to:", choices:["The feedback students give teachers","The influence of a test on curriculum and teaching","The effect of scores on student morale","The reliability coefficient of a standardized test"], ans:1, cat:"Assessment Philosophy", exp:"Washback effect describes how high-stakes testing influences and often drives curriculum content and instructional methods." },
+  { q:"Which is a characteristic of a good test?", choices:["Covers only easy content for high passing rates","Is valid, reliable, objective, practical, and comprehensive","Uses only essay items","Has a fixed, unchanging format"], ans:1, cat:"Test Qualities", exp:"A good test should be valid, reliable, objective, practical, and comprehensive — covering all intended learning outcomes." },
+  { q:"The purpose of item analysis in test development is to:", choices:["Count the total number of test takers","Determine the correct answer to each item","Evaluate the quality and effectiveness of each test item","Assign grades to students"], ans:2, cat:"Item Analysis", exp:"Item analysis evaluates the difficulty and discrimination of each item to improve future test quality." },
+  { q:"In scoring essays, the method where the teacher reads all responses to one question before moving on is called:", choices:["Holistic scoring","Analytic scoring","Point-by-point method","Sequential scoring"], ans:2, cat:"Assessment Tools", exp:"The point-by-point method ensures consistent scoring by evaluating one question at a time for all students." },
+  { q:"Assessment that involves students evaluating each other's work is called:", choices:["Self-assessment","Peer assessment","Authentic assessment","Portfolio assessment"], ans:1, cat:"Types of Assessment", exp:"Peer assessment involves students evaluating their classmates' work, promoting critical thinking and collaborative learning." },
+  { q:"The Kirkpatrick four-level model of training evaluation levels are:", choices:["Reaction, Learning, Behavior, Results","Input, Process, Output, Outcome","Planning, Implementing, Evaluating, Reporting","Designing, Developing, Delivering, Debriefing"], ans:0, cat:"Evaluation Models", exp:"Donald Kirkpatrick's four-level model: Reaction, Learning, Behavior, Results — widely used in training evaluation." },
+  { q:"Criterion-referenced grading means:", choices:["Grading based on ranking among classmates","Grading based on improvement from a pretest","Grading based on mastery of specific learning targets","Grading based on teacher impression"], ans:2, cat:"Grading Systems", exp:"Criterion-referenced grading evaluates performance against predetermined standards, not against other students." },
+  { q:"In constructing multiple-choice items, distractors should be:", choices:["Clearly wrong to make the test easy","Plausible but incorrect to test true understanding","Copies of correct statements from textbooks","Longer than the correct answer"], ans:1, cat:"Test Construction", exp:"Good distractors are plausible — they attract students who do not fully understand the concept." },
+  { q:"A z-score of 0 means the student's score is:", choices:["Zero","At the mean of the distribution","At the minimum score","One standard deviation above the mean"], ans:1, cat:"Statistics in Assessment", exp:"A z-score of 0 means the student scored exactly at the mean of the distribution." },
+  { q:"The T-score has a mean of 50 and a standard deviation of:", choices:["10","15","20","5"], ans:0, cat:"Statistics in Assessment", exp:"T-scores have a mean of 50 and a standard deviation of 10, allowing comparison across different tests." },
+  { q:"'Understanding by Design' (UbD) by Wiggins and McTighe uses which approach?", choices:["Forward design","Constructive alignment","Backward design","Differentiated instruction"], ans:2, cat:"Curriculum Design", exp:"UbD uses backward design: identify desired outcomes → plan assessment → design instruction." },
+  { q:"The most appropriate assessment for evaluating a student's ability to conduct a science experiment is:", choices:["Multiple-choice test","True-or-false test","Performance task/practical exam","Matching type test"], ans:2, cat:"Types of Assessment", exp:"A performance task directly observes the student conducting the experiment, assessing psychomotor and process skills." },
+  { q:"Reporting student performance in terms of letter grades (A, B, C, D, F) is a form of:", choices:["Descriptive reporting","Criterion-referenced reporting","Symbolic reporting","Norm-referenced reporting"], ans:2, cat:"Grading Systems", exp:"Letter grades are symbolic representations of student achievement levels." },
+  { q:"High-stakes testing refers to tests:", choices:["That are very long and detailed","Whose results have significant consequences for students or schools","That are only for gifted students","That are informal classroom assessments"], ans:1, cat:"Assessment Philosophy", exp:"High-stakes tests have major consequences — graduation, promotion, school funding, or teacher evaluation." },
+  { q:"'Assessment for learning' is synonymous with:", choices:["Summative assessment","Formative assessment","Diagnostic assessment","Standardized assessment"], ans:1, cat:"Assessment Philosophy", exp:"Assessment for learning is another term for formative assessment — used to inform and improve ongoing instruction." },
+  { q:"Parallel forms reliability is established by:", choices:["Testing the same group twice","Correlating scores from two equivalent forms of the same test","Analyzing internal consistency","Having two raters score the same work"], ans:1, cat:"Reliability", exp:"Parallel forms reliability is established by administering two versions of the same test and correlating the scores." },
+],
+
+};
+
+// ── STATE ──
+let currentTopic = null;
+let questions = [];
+let current = 0;
+let correct = 0;
+let wrong = 0;
+let answered = false;
+
+const topicLabels = {
+  'world-authors': '🌍 World Authors',
+  'rizal': '🇵🇭 Life & Works of Rizal',
+  'assessment': '📝 Assessment of Learning'
+};
+
+// ── FUNCTIONS ──
+function startTopic(topic) {
+  currentTopic = topic;
+  questions = allQuestions[topic];
+  current = 0; correct = 0; wrong = 0; answered = false;
+
+  document.getElementById('topic-screen').style.display = 'none';
+  document.getElementById('score-area').classList.add('visible');
+  document.getElementById('quiz-wrap').classList.add('visible');
+  document.getElementById('correct-count').textContent = 0;
+  document.getElementById('wrong-count').textContent = 0;
+  document.getElementById('topic-badge').textContent = topicLabels[topic];
+  document.getElementById('question-card').style.display = '';
+  document.getElementById('finish-screen').className = 'finish-screen';
+
+  renderQuestion();
+}
+
+function goToTopics() {
+  document.getElementById('topic-screen').style.display = '';
+  document.getElementById('topic-screen').style.animation = 'none';
+  document.getElementById('topic-screen').offsetHeight;
+  document.getElementById('topic-screen').style.animation = 'fadeUp 0.4s ease';
+  document.getElementById('score-area').classList.remove('visible');
+  document.getElementById('quiz-wrap').classList.remove('visible');
+}
+
+function renderQuestion() {
+  const q = questions[current];
+  answered = false;
+  document.getElementById('q-number').textContent = `Q${current + 1}`;
+  document.getElementById('q-category').textContent = q.cat;
+  document.getElementById('question-text').textContent = q.q;
+
+  const choicesEl = document.getElementById('choices');
+  choicesEl.innerHTML = '';
+  ['A','B','C','D'].forEach((lbl, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'choice-btn';
+    btn.innerHTML = `<span class="choice-label">${lbl}</span><span>${q.choices[i]}</span>`;
+    btn.onclick = () => answerQ(i);
+    choicesEl.appendChild(btn);
+  });
+
+  document.getElementById('feedback-box').className = 'feedback-box';
+  document.getElementById('next-btn').className = 'next-btn';
+  updateProgress();
+}
+
+function answerQ(chosen) {
+  if (answered) return;
+  answered = true;
+  const q = questions[current];
+  const btns = document.querySelectorAll('.choice-btn');
+  btns.forEach(b => b.disabled = true);
+
+  const isCorrect = chosen === q.ans;
+  btns[chosen].classList.add(isCorrect ? 'correct-ans' : 'wrong-ans');
+  if (!isCorrect) btns[q.ans].classList.add('correct-ans');
+
+  if (isCorrect) { correct++; document.getElementById('correct-count').textContent = correct; }
+  else           { wrong++;   document.getElementById('wrong-count').textContent = wrong; }
+
+  const fb = document.getElementById('feedback-box');
+  document.getElementById('feedback-title').innerHTML = isCorrect ? '✓ &nbsp;Correct!' : '✗ &nbsp;Incorrect';
+  document.getElementById('feedback-body').textContent = q.exp;
+  fb.className = 'feedback-box show ' + (isCorrect ? 'correct-fb' : 'wrong-fb');
+  document.getElementById('next-btn').className = 'next-btn show';
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= questions.length) { showFinish(); return; }
+  const card = document.getElementById('question-card');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = '';
+  renderQuestion();
+}
+
+function updateProgress() {
+  const pct = (current / questions.length) * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+  document.getElementById('progress-label').textContent = `${current} / ${questions.length} answered`;
+}
+
+function showFinish() {
+  document.getElementById('question-card').style.display = 'none';
+  document.getElementById('finish-screen').className = 'finish-screen show';
+  document.getElementById('final-correct').textContent = correct;
+  document.getElementById('final-wrong').textContent = wrong;
+  document.getElementById('final-pct').textContent = Math.round((correct / questions.length) * 100) + '%';
+  document.getElementById('progress-bar').style.width = '100%';
+  document.getElementById('progress-label').textContent = `${questions.length} / ${questions.length} answered`;
+  const label = topicLabels[currentTopic].replace(/^.{2}\s/, '');
+  document.getElementById('finish-subtitle').textContent = `You have completed all ${questions.length} questions on ${label}.`;
+}
+
+function restartTopic() {
+  current = 0; correct = 0; wrong = 0;
+  document.getElementById('correct-count').textContent = 0;
+  document.getElementById('wrong-count').textContent = 0;
+  document.getElementById('question-card').style.display = '';
+  document.getElementById('finish-screen').className = 'finish-screen';
+  renderQuestion();
+}
+</script>
+</body>
+</html>
