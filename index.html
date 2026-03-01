@@ -332,6 +332,12 @@
       <div class="topic-desc">Principles of educational assessment, testing, measurement, and evaluation for effective teaching.</div>
       <span class="topic-count">50 Questions</span>
     </div>
+    <div class="topic-card" onclick="startTopic('generals')">
+      <span class="topic-icon">🏆</span>
+      <div class="topic-title">General Knowledge & Trivia</div>
+      <div class="topic-desc">Fathers of various fields, Philippine literature, Republic Acts, notable Filipinos, and science facts.</div>
+      <span class="topic-count">50 Questions</span>
+    </div>
   </div>
 </div>
 
@@ -568,6 +574,68 @@ const allQuestions = {
   { q:"Parallel forms reliability is established by:", choices:["Testing the same group twice","Correlating scores from two equivalent forms of the same test","Analyzing internal consistency","Having two raters score the same work"], ans:1, cat:"Reliability", exp:"Parallel forms reliability is established by administering two versions of the same test and correlating the scores." },
 ],
 
+'generals': [
+  { q:"Who is known as the Father of Modern Astronomy?", choices:["Galileo Galilei","Isaac Newton","Nicolaus Copernicus","Johannes Kepler"], ans:2, cat:"Fathers of Fields", exp:"Nicolaus Copernicus proposed the heliocentric model — that the Sun, not Earth, is the center of the solar system." },
+  { q:"Who is the Father of Modern Physics?", choices:["Albert Einstein","Galileo Galilei","Max Planck","Isaac Newton"], ans:1, cat:"Fathers of Fields", exp:"Galileo Galilei is credited as the Father of Modern Physics for his use of experimental observation and mathematical analysis." },
+  { q:"Who is the Founder of Quantum Mechanics?", choices:["Niels Bohr","Albert Einstein","Max Planck","Werner Heisenberg"], ans:2, cat:"Fathers of Fields", exp:"Max Planck founded quantum mechanics by proposing that energy is emitted in discrete units called quanta." },
+  { q:"Who is the Father of Algebra?", choices:["René Descartes","Diophantus / Muhammad Al-Khwarizmi","Isaac Newton","Euclid"], ans:1, cat:"Fathers of Fields", exp:"Diophantus (traditional) and Muhammad Al-Khwarizmi (who coined 'algebra' from 'Al-Jabr') are both cited as fathers of algebra." },
+  { q:"Who is known as the Father of Computer Science?", choices:["Alan Turing","Charles Babbage","George Boole","Ada Lovelace"], ans:2, cat:"Fathers of Fields", exp:"George Boole developed Boolean algebra, the foundation of modern computer science and digital logic." },
+  { q:"Who is the Father of Sociology?", choices:["Max Weber","Émile Durkheim","Ibn Khaldun / Auguste Comte","Karl Marx"], ans:2, cat:"Fathers of Fields", exp:"Ibn Khaldun and Auguste Comte are both recognized as fathers of sociology for establishing it as a systematic discipline." },
+  { q:"Who is the Father of Modern Linguistics?", choices:["Noam Chomsky","Ferdinand de Saussure / Noam Chomsky","Panini","Roman Jakobson"], ans:1, cat:"Fathers of Fields", exp:"Ferdinand de Saussure founded structural linguistics; Noam Chomsky developed generative grammar — both are called fathers of modern linguistics." },
+  { q:"Who is the Father of Geometry?", choices:["Pythagoras","Archimedes","Euclid","Thales"], ans:2, cat:"Fathers of Fields", exp:"Euclid's 'Elements' (c. 300 BC) systematized geometry and served as the main mathematics textbook for over 2,000 years." },
+  { q:"Who is the Father of Modern Medicine?", choices:["Galen","Hippocrates","Herophilus","Avicenna"], ans:1, cat:"Fathers of Fields", exp:"Hippocrates of Kos established medicine as a rational discipline separate from religion and superstition." },
+  { q:"Who is the Father of Biology?", choices:["Charles Darwin","Gregor Mendel","Aristotle","Carl Linnaeus"], ans:2, cat:"Fathers of Fields", exp:"Aristotle wrote extensively about animals and plants, classifying over 500 species — earning him the title Father of Biology." },
+  { q:"Who is the Father of Genetics?", choices:["James Watson","Charles Darwin","Louis Pasteur","Gregor Mendel"], ans:3, cat:"Fathers of Fields", exp:"Gregor Mendel's experiments with pea plants established the foundational laws of inheritance." },
+  { q:"Who is the Father of Microbiology?", choices:["Louis Pasteur","Robert Koch","Antonie van Leeuwenhoek","Joseph Lister"], ans:2, cat:"Fathers of Fields", exp:"Antonie van Leeuwenhoek was the first to observe microorganisms through a microscope he built himself." },
+  { q:"Who is the Father of Taxonomy?", choices:["Charles Darwin","Aristotle","Carolus Linnaeus","Georges Cuvier"], ans:2, cat:"Fathers of Fields", exp:"Carolus Linnaeus developed the binomial nomenclature system used to classify all living organisms." },
+  { q:"Who is the Father of Psychoanalysis?", choices:["Carl Jung","Alfred Adler","B.F. Skinner","Sigmund Freud"], ans:3, cat:"Fathers of Fields", exp:"Sigmund Freud founded psychoanalysis, emphasizing the unconscious mind's role in behavior." },
+  { q:"Who is the Father of Modern Chemistry?", choices:["John Dalton","Antoine Lavoisier","Robert Boyle","Dmitri Mendeleev"], ans:1, cat:"Fathers of Fields", exp:"Antoine Lavoisier is credited as the Father of Modern Chemistry for establishing the law of conservation of mass." },
+  { q:"Who is the Father of the Periodic Table?", choices:["John Dalton","Robert Boyle","Henry Moseley","Dmitri Mendeleev"], ans:3, cat:"Fathers of Fields", exp:"Dmitri Mendeleev arranged elements by atomic weight and predicted the properties of undiscovered elements." },
+  { q:"Who is the Father of History?", choices:["Thucydides","Plutarch","Herodotus","Tacitus"], ans:2, cat:"Fathers of Fields", exp:"Herodotus is called the Father of History for his systematic investigation and recording of historical events." },
+  { q:"Who is the Father of English Literature and English Poetry?", choices:["William Shakespeare","John Milton","Geoffrey Chaucer","Francis Bacon"], ans:2, cat:"Fathers of Fields", exp:"Geoffrey Chaucer, author of 'The Canterbury Tales,' is considered the Father of English Literature and English Poetry." },
+  { q:"Who is the Father of the Short Story?", choices:["Guy de Maupassant","O. Henry","Anton Chekhov","Edgar Allan Poe"], ans:3, cat:"Fathers of Fields", exp:"Edgar Allan Poe is widely regarded as the Father of the Short Story for defining its form and technique." },
+  { q:"Who is the Father of Modern Economics?", choices:["John Maynard Keynes","Karl Marx","Adam Smith","David Ricardo"], ans:2, cat:"Fathers of Fields", exp:"Adam Smith's 'The Wealth of Nations' (1776) laid the foundations of modern economic theory." },
+  { q:"The first book written in the Philippines was:", choices:["Noli Me Tangere","Florante at Laura","Doctrina Cristiana","Ibong Adarna"], ans:2, cat:"Philippine Literature", exp:"'Doctrina Cristiana' (1593) was the first book printed in the Philippines, a Christian catechism in Spanish and Tagalog." },
+  { q:"Who is the Father of Ilocano Literature?", choices:["Francisco Lopez","Pedro Bukaneg","Vicente Sotto","Cecilio Lopez"], ans:1, cat:"Philippine Literature", exp:"Pedro Bukaneg is recognized as the Father of Ilocano Literature and the earliest Ilocano poet on record." },
+  { q:"Who is the Father of Tagalog Poetry?", choices:["Alejandro Abadilla","Jose Rizal","Francisco Baltazar","Narciso Reyes"], ans:2, cat:"Philippine Literature", exp:"Francisco Baltazar (Balagtas), author of 'Florante at Laura,' is the Prince of Tagalog Poets and Father of Tagalog Poetry." },
+  { q:"'Lola Basyang' is the pen name of:", choices:["Narciso Reyes","Pascual Poblete","Severino Reyes","Zoilo Galang"], ans:2, cat:"Philippine Literature", exp:"Severino Reyes used the pen name 'Lola Basyang' for his popular Filipino children's stories." },
+  { q:"The first and longest running komiks series in the Philippines is:", choices:["Pugad Baboy","Kenkoy","Dyesebel","Darna"], ans:1, cat:"Philippine Literature", exp:"'Kenkoy' appeared in Liwayway Magazine in 1929, making it the first and longest-running Filipino comic strip." },
+  { q:"Who is the Father of Philippine Journalism and Philippine Masonry?", choices:["Jose Rizal","Graciano Lopez Jaena","Apolinario Mabini","Marcelo del Pilar"], ans:3, cat:"Philippine Literature", exp:"Marcelo H. del Pilar is recognized as both the Father of Philippine Journalism and the Father of Philippine Masonry." },
+  { q:"Who is the Father of Modern Tagalog Poetry and Modern Tagalog Prose?", choices:["Francisco Baltazar","Jose Rizal","Deogracias Rosario","Alejandro Abadilla"], ans:3, cat:"Philippine Literature", exp:"Alejandro Abadilla is recognized as both the Father of Modern Tagalog Poetry and Father of Modern Tagalog Prose." },
+  { q:"The ancient Filipino writing system is called:", choices:["Kulit-Tagalog","Baybayin / Alibata","Abecedario","Kudlit"], ans:1, cat:"Philippine Literature", exp:"The ancient Filipino writing system is called Baybayin (or Alibata). It originally consisted of 17 characters." },
+  { q:"Who is known as the 'poet of the workers or laborers' in Philippine literature?", choices:["Francisco Baltazar","Jose Rizal","Amado Hernandez","Fernando Ma. Guerrero"], ans:2, cat:"Philippine Literature", exp:"Amado V. Hernandez was a poet, journalist, and labor leader known as the poet of the workers." },
+  { q:"Who wrote 'Lupang Tinubuan,' considered the best story of the Japanese Period?", choices:["Zoilo Galang","Severino Reyes","Narciso Reyes","Jose Garcia Villa"], ans:2, cat:"Philippine Literature", exp:"Narciso Reyes authored 'Lupang Tinubuan,' regarded as the finest Filipino story from the Japanese Occupation period." },
+  { q:"Republic Act 10533 is known as:", choices:["Anti-Bullying Act","NSTP Act of 2001","Enhanced Basic Education Act of 2013 (K-12)","Governance of Basic Education Act"], ans:2, cat:"Republic Acts", exp:"RA 10533 is the Enhanced Basic Education Act of 2013, implementing the K to 12 Program in the Philippines." },
+  { q:"Republic Act 10627 is the:", choices:["Anti-Red Tape Act","Anti-Sexual Harassment Act","Free Public Secondary Act","Anti-Bullying Act of 2013"], ans:3, cat:"Republic Acts", exp:"RA 10627, the Anti-Bullying Act of 2013, requires all elementary and secondary schools to adopt anti-bullying policies." },
+  { q:"Republic Act 9163 is the:", choices:["GASTPE Act","Governance of Basic Education Act","NSTP Act of 2001","CHED Act"], ans:2, cat:"Republic Acts", exp:"RA 9163 is the National Service Training Program (NSTP) Act of 2001, mandatory for college students." },
+  { q:"Republic Act 9155 is the:", choices:["Anti-Red Tape Act","Free Secondary Education Act","Governance of Basic Education Act of 2001","K-12 Act"], ans:2, cat:"Republic Acts", exp:"RA 9155 is the Governance of Basic Education Act of 2001, establishing the framework of basic education governance." },
+  { q:"Republic Act 7722 created which government body?", choices:["TESDA","DepEd","CHED","CSC"], ans:2, cat:"Republic Acts", exp:"RA 7722 created the Commission on Higher Education (CHED) in 1994, governing tertiary education in the Philippines." },
+  { q:"Republic Act 7796 created which government body?", choices:["CHED","TESDA","DOLE","NCCA"], ans:1, cat:"Republic Acts", exp:"RA 7796 created the Technical Education and Skills Development Authority (TESDA) in 1994." },
+  { q:"Republic Act 7877 is the:", choices:["NSTP Act","Anti-Bullying Act","Anti-Sexual Harassment Act of 1995","Free Public Secondary Act"], ans:2, cat:"Republic Acts", exp:"RA 7877 is the Anti-Sexual Harassment Act of 1995, protecting individuals from sexual harassment in work and education." },
+  { q:"Republic Act 6655 is the:", choices:["Science and Technology Scholarship Act","Free Public Secondary Education Act of 1988","GASTPE Act","Anti-Red Tape Act"], ans:1, cat:"Republic Acts", exp:"RA 6655 is the Free Public Secondary Education Act of 1988, making secondary education free in public schools." },
+  { q:"Republic Act 8525 is the:", choices:["Adopt-a-School Program","Flag and Heraldic Code","Higher Education Modernization Act","Scholarship Act"], ans:0, cat:"Republic Acts", exp:"RA 8525 established the Adopt-a-School Program, allowing private entities to assist public schools." },
+  { q:"Executive Order 66 governs:", choices:["Teacher deployment","Cancellation of classes due to typhoon/flooding/calamities","School calendar","Tuition fee regulation"], ans:1, cat:"Republic Acts", exp:"E.O. 66 provides the rules for cancellation of classes due to typhoons, flooding, and other calamities." },
+  { q:"Who is the Father of Philippine Independence, Republic, and National Language?", choices:["Jose Rizal","Emilio Aguinaldo","Andres Bonifacio","Manuel L. Quezon"], ans:3, cat:"Notable Filipinos", exp:"Manuel L. Quezon is recognized as the Father of Philippine Independence, the Philippine Republic, and the Philippine National Language." },
+  { q:"Who is called the 'Brain of the Philippine Revolution'?", choices:["Andres Bonifacio","Emilio Aguinaldo","Apolinario Mabini","Antonio Luna"], ans:2, cat:"Notable Filipinos", exp:"Apolinario Mabini served as the chief adviser of Aguinaldo and was called the 'Brain of the Revolution.'" },
+  { q:"Who is known as the 'Greatest Filipino Painter'?", choices:["Fernando Amorsolo","Felix Resurreccion Hidalgo","Carlos Francisco","Juan Luna"], ans:3, cat:"Notable Filipinos", exp:"Juan Luna is celebrated as the Greatest Filipino Painter, famous for his masterpiece 'Spolarium.'" },
+  { q:"Who was the first Filipino Hero?", choices:["Andres Bonifacio","Jose Rizal","Gabriela Silang","Lapu-lapu"], ans:3, cat:"Notable Filipinos", exp:"Lapu-lapu is recognized as the first Filipino hero for defeating Ferdinand Magellan on April 27, 1521." },
+  { q:"Who composed the music of the Philippine National Anthem?", choices:["Jose Palma","Marcela Agoncillo","Julian Felipe","Emilio Aguinaldo"], ans:2, cat:"Notable Filipinos", exp:"Julian Felipe composed the music of 'Lupang Hinirang' in 1898." },
+  { q:"Who is known as the 'Mother of Balintawak'?", choices:["Gabriela Silang","Trinidad Tecson","Gregoria de Jesus","Melchora Aquino"], ans:3, cat:"Notable Filipinos", exp:"Melchora Aquino (Tandang Sora) sheltered Katipuneros and is known as the Mother of Balintawak." },
+  { q:"Who is the Lakambini (Muse) of the Katipunan?", choices:["Melchora Aquino","Teresa Magbanua","Trinidad Tecson","Gregoria de Jesus"], ans:3, cat:"Notable Filipinos", exp:"Gregoria de Jesus, wife of Andres Bonifacio and keeper of the Katipunan seal, is the Lakambini of the Katipunan." },
+  { q:"Who was the President of the First Philippine Republic?", choices:["Andres Bonifacio","Apolinario Mabini","Emilio Aguinaldo","Antonio Luna"], ans:2, cat:"Notable Filipinos", exp:"General Emilio Aguinaldo became the first President of the Philippine Republic, proclaimed at Malolos, Bulacan." },
+  { q:"Who made the First Philippine Flag?", choices:["Gregoria de Jesus","Melchora Aquino","Marcela Agoncillo","Teresa Magbanua"], ans:2, cat:"Notable Filipinos", exp:"Marcela Agoncillo sewed the first Philippine flag in Hong Kong in 1898." },
+  { q:"What is the powerhouse of the cell?", choices:["Nucleus","Ribosome","Mitochondria","Chloroplast"], ans:2, cat:"Science Facts", exp:"Mitochondria produce ATP, the cell's primary energy currency, through cellular respiration." },
+  { q:"Which atmospheric layer contains the ozone layer?", choices:["Troposphere","Mesosphere","Thermosphere","Stratosphere"], ans:3, cat:"Science Facts", exp:"The ozone layer (O₃) is in the stratosphere, 15–35 km above Earth, protecting us from harmful UV radiation." },
+  { q:"What organism causes red tide?", choices:["Bacteria","Dinoflagellates (harmful algae)","Fungi","Plankton"], ans:1, cat:"Science Facts", exp:"Red tide is caused by a rapid bloom of dinoflagellates, which can contaminate shellfish and cause shellfish poisoning." },
+  { q:"What blood type is the universal donor?", choices:["Type A","Type B","Type AB","Type O"], ans:3, cat:"Science Facts", exp:"Type O negative blood is the universal donor for red blood cells because it lacks A, B, and Rh antigens." },
+  { q:"Who proposed the theory of Natural Selection — 'Survival of the Fittest'?", choices:["Gregor Mendel","Alfred Wallace","Jean-Baptiste Lamarck","Charles Darwin"], ans:3, cat:"Science Facts", exp:"Charles Darwin proposed natural selection as the mechanism of evolution in 'On the Origin of Species' (1859)." },
+  { q:"The heliocentric model — that the Sun is the center of the solar system — was proposed by:", choices:["Galileo Galilei","Isaac Newton","Nicolaus Copernicus","Johannes Kepler"], ans:2, cat:"Science Facts", exp:"Nicolaus Copernicus proposed the heliocentric model in his 1543 work 'De revolutionibus orbium coelestium.'" },
+  { q:"The belief that one's own culture is superior to others is called:", choices:["Xenocentrism","Cultural relativism","Ethnocentrism","Nationalism"], ans:2, cat:"Social Studies", exp:"Ethnocentrism is the tendency to view one's own cultural group as superior and judge other cultures by one's own standards." },
+  { q:"Xenocentrism refers to:", choices:["Belief that one's culture is superior","Belief that foreign products or cultures are superior","The study of foreign cultures","Rejection of one's own culture"], ans:1, cat:"Social Studies", exp:"Xenocentrism is the belief that foreign products, styles, or ideas are superior to those of one's own culture." },
+  { q:"Taxation is often referred to as:", choices:["The backbone of justice","The lifeblood of the government","The foundation of democracy","The tool of reform"], ans:1, cat:"Social Studies", exp:"Taxation is called the 'lifeblood of the government' because without it, the government cannot function and deliver services." },
+  { q:"'La Solidaridad' was the propaganda newspaper of:", choices:["The Katipunan","La Liga Filipina","The Reform/Propaganda Movement","The First Philippine Republic"], ans:2, cat:"Philippine History", exp:"'La Solidaridad' was the official newspaper of the Propaganda Movement (1889–1895), edited by Marcelo del Pilar." },
+],
+
 };
 
 // ── STATE ──
@@ -581,7 +649,8 @@ let answered = false;
 const topicLabels = {
   'world-authors': '🌍 World Authors',
   'rizal': '🇵🇭 Life & Works of Rizal',
-  'assessment': '📝 Assessment of Learning'
+  'assessment': '📝 Assessment of Learning',
+  'generals': '🏆 General Knowledge & Trivia'
 };
 
 // ── FUNCTIONS ──
